@@ -30,13 +30,13 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Status',
 		name: 'Connection status',
-		style: style('SGP\\nOFFLINE', combineRgb(80, 20, 20)),
+		style: style('SGP\nOFFLINE', combineRgb(80, 20, 20)),
 		steps: [{ down: [], up: [] }],
 		feedbacks: [
 			{
 				feedbackId: 'connected',
 				options: {},
-				style: { bgcolor: GREEN, color: BLACK, text: 'SGP\\nREADY' },
+				style: { bgcolor: GREEN, color: BLACK, text: 'SGP\nREADY' },
 			},
 		],
 	}
@@ -58,7 +58,7 @@ export function updatePresets(self) {
 				type: 'button',
 				category: 'Library presets',
 				name: `${s.name} — next row`,
-				style: style(`${s.name}\\n▶ NEXT\\n$(streamgraphics-pro:preset_${k}_row)/$(streamgraphics-pro:preset_${k}_rows)`, DARK, WHITE, '7'),
+				style: style(`${s.name}\n▶ NEXT\n$(streamgraphics-pro:preset_${k}_row)/$(streamgraphics-pro:preset_${k}_rows)`, DARK, WHITE, '7'),
 				steps: [{ down: [{ actionId: 'preset_next', options: { name: s.name } }], up: [] }],
 				feedbacks: [],
 			}
@@ -66,7 +66,7 @@ export function updatePresets(self) {
 				type: 'button',
 				category: 'Library presets',
 				name: `${s.name} — previous row`,
-				style: style(`${s.name}\\n◀ PREV`, DARK, WHITE, '7'),
+				style: style(`${s.name}\n◀ PREV`, DARK, WHITE, '7'),
 				steps: [{ down: [{ actionId: 'preset_prev', options: { name: s.name } }], up: [] }],
 				feedbacks: [],
 			}
@@ -77,7 +77,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Library presets',
 		name: 'ALL graphics off air',
-		style: style('ALL\\nOFF', combineRgb(90, 20, 20)),
+		style: style('ALL\nOFF', combineRgb(90, 20, 20)),
 		steps: [{ down: [{ actionId: 'preset_alloff', options: {} }], up: [] }],
 		feedbacks: [],
 	}
@@ -91,7 +91,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — on/off air`,
-			style: style(`${b.name}\\nAIR`, DARK),
+			style: style(`${b.name}\nAIR`, DARK),
 			steps: [
 				{ down: [{ actionId: 'sb_show', options: { name: b.name } }], up: [] },
 				{ down: [{ actionId: 'sb_hide', options: { name: b.name } }], up: [] },
@@ -102,7 +102,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — point team 1`,
-			style: style(`$(streamgraphics-pro:sb_${k}_team1)\\n+1\\n$(streamgraphics-pro:sb_${k}_score1)`, BLUE, WHITE, '7'),
+			style: style(`$(streamgraphics-pro:sb_${k}_team1)\n+1\n$(streamgraphics-pro:sb_${k}_score1)`, BLUE, WHITE, '7'),
 			steps: [{ down: [{ actionId: 'sb_point', options: { name: b.name, team: '1', delta: '1' } }], up: [] }],
 			feedbacks: [],
 		}
@@ -110,7 +110,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — point team 2`,
-			style: style(`$(streamgraphics-pro:sb_${k}_team2)\\n+1\\n$(streamgraphics-pro:sb_${k}_score2)`, BLUE, WHITE, '7'),
+			style: style(`$(streamgraphics-pro:sb_${k}_team2)\n+1\n$(streamgraphics-pro:sb_${k}_score2)`, BLUE, WHITE, '7'),
 			steps: [{ down: [{ actionId: 'sb_point', options: { name: b.name, team: '2', delta: '1' } }], up: [] }],
 			feedbacks: [],
 		}
@@ -118,7 +118,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — take a point back, team 1`,
-			style: style(`T1\\n−1`, combineRgb(60, 60, 70), WHITE, '14'),
+			style: style(`T1\n−1`, combineRgb(60, 60, 70), WHITE, '14'),
 			steps: [{ down: [{ actionId: 'sb_point', options: { name: b.name, team: '1', delta: '-1' } }], up: [] }],
 			feedbacks: [],
 		}
@@ -126,7 +126,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — take a point back, team 2`,
-			style: style(`T2\\n−1`, combineRgb(60, 60, 70), WHITE, '14'),
+			style: style(`T2\n−1`, combineRgb(60, 60, 70), WHITE, '14'),
 			steps: [{ down: [{ actionId: 'sb_point', options: { name: b.name, team: '2', delta: '-1' } }], up: [] }],
 			feedbacks: [],
 		}
@@ -134,7 +134,7 @@ export function updatePresets(self) {
 			type: 'button',
 			category: cat,
 			name: `${b.name} — next game/set`,
-			style: style(`NEXT\\nGAME\\n$(streamgraphics-pro:sb_${k}_game)`, DARK, WHITE, '7'),
+			style: style(`NEXT\nGAME\n$(streamgraphics-pro:sb_${k}_game)`, DARK, WHITE, '7'),
 			steps: [{ down: [{ actionId: 'sb_nextgame', options: { name: b.name } }], up: [] }],
 			feedbacks: [],
 		}
@@ -145,7 +145,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Presenter timer',
 		name: 'Timer on/off air',
-		style: style('TIMER\\nAIR', DARK),
+		style: style('TIMER\nAIR', DARK),
 		steps: [
 			{ down: [{ actionId: 'timer_air', options: {} }], up: [] },
 			{ down: [{ actionId: 'timer_off', options: {} }], up: [] },
@@ -156,7 +156,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Presenter timer',
 		name: 'Timer start / pause',
-		style: style('START\\n$(streamgraphics-pro:timer_time)', DARK, WHITE, '14'),
+		style: style('START\n$(streamgraphics-pro:timer_time)', DARK, WHITE, '14'),
 		steps: [
 			{ down: [{ actionId: 'timer_start', options: {} }], up: [] },
 			{ down: [{ actionId: 'timer_pause', options: {} }], up: [] },
@@ -193,7 +193,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Board on/off air',
-		style: style('BALL\\nAIR', DARK),
+		style: style('BALL\nAIR', DARK),
 		steps: [
 			{ down: [{ actionId: 'bl_show', options: {} }], up: [] },
 			{ down: [{ actionId: 'bl_hide', options: {} }], up: [] },
@@ -204,7 +204,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Ball',
-		style: style('BALL\\n$(streamgraphics-pro:bl_count)', GREEN, BLACK, '14'),
+		style: style('BALL\n$(streamgraphics-pro:bl_count)', GREEN, BLACK, '14'),
 		steps: [{ down: [{ actionId: 'bl_ball', options: {} }], up: [] }],
 		feedbacks: [],
 	}
@@ -212,7 +212,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Strike',
-		style: style('STRIKE\\n$(streamgraphics-pro:bl_count)', combineRgb(180, 60, 20), WHITE, '14'),
+		style: style('STRIKE\n$(streamgraphics-pro:bl_count)', combineRgb(180, 60, 20), WHITE, '14'),
 		steps: [{ down: [{ actionId: 'bl_strike', options: {} }], up: [] }],
 		feedbacks: [],
 	}
@@ -220,7 +220,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Out',
-		style: style('OUT\\n$(streamgraphics-pro:bl_outs)', RED, WHITE, '14'),
+		style: style('OUT\n$(streamgraphics-pro:bl_outs)', RED, WHITE, '14'),
 		steps: [{ down: [{ actionId: 'bl_out', options: {} }], up: [] }],
 		feedbacks: [],
 	}
@@ -228,7 +228,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Next half-inning',
-		style: style('NEXT\\n$(streamgraphics-pro:bl_inning)', DARK, WHITE, '7'),
+		style: style('NEXT\n$(streamgraphics-pro:bl_inning)', DARK, WHITE, '7'),
 		steps: [{ down: [{ actionId: 'bl_advance', options: {} }], up: [] }],
 		feedbacks: [],
 	}
@@ -236,7 +236,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Run — away',
-		style: style('AWAY\\n+1\\n$(streamgraphics-pro:bl_score1)', BLUE, WHITE, '7'),
+		style: style('AWAY\n+1\n$(streamgraphics-pro:bl_score1)', BLUE, WHITE, '7'),
 		steps: [{ down: [{ actionId: 'bl_run', options: { team: '1', delta: '1' } }], up: [] }],
 		feedbacks: [],
 	}
@@ -244,7 +244,7 @@ export function updatePresets(self) {
 		type: 'button',
 		category: 'Baseball / softball',
 		name: 'Run — home',
-		style: style('HOME\\n+1\\n$(streamgraphics-pro:bl_score2)', BLUE, WHITE, '7'),
+		style: style('HOME\n+1\n$(streamgraphics-pro:bl_score2)', BLUE, WHITE, '7'),
 		steps: [{ down: [{ actionId: 'bl_run', options: { team: '2', delta: '1' } }], up: [] }],
 		feedbacks: [],
 	}

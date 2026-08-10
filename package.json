@@ -6,7 +6,10 @@
   "main": "main.js",
   "scripts": {
     "check": "node --check main.js && node --check src/api.js && node --check src/actions.js && node --check src/feedbacks.js && node --check src/variables.js && node --check src/presets.js && npm run check:manifest",
-    "check:manifest": "node -e \"const v=require('./node_modules/@companion-module/base/generated/validate_manifest.js'),f=typeof v==='function'?v:(v.default||Object.values(v)[0]),j=require('./companion/manifest.json');if(!f(j)){console.error(JSON.stringify(f.errors,null,1));process.exit(1)}console.log('manifest ok')\""
+    "check:manifest": "node -e \"const v=require('./node_modules/@companion-module/base/generated/validate_manifest.js'),f=typeof v==='function'?v:(v.default||Object.values(v)[0]),j=require('./companion/manifest.json');if(!f(j)){console.error(JSON.stringify(f.errors,null,1));process.exit(1)}console.log('manifest ok')\"",
+    "package": "node node_modules/@companion-module/tools/scripts/build-connection.js",
+    "package:check": "node node_modules/@companion-module/tools/scripts/check-connection.js",
+    "test:live": "node test-harness.mjs"
   },
   "license": "MIT",
   "repository": {
@@ -14,9 +17,12 @@
     "url": "git+https://github.com/anirudhatalmale6-alt/companion-module-streamgraphics-pro.git"
   },
   "dependencies": {
-    "@companion-module/base": "^2.1.2"
+    "@companion-module/base": "^1.14.1"
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "@companion-module/tools": "^2.7.2"
   }
 }

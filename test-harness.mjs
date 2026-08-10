@@ -165,6 +165,33 @@ for (const [id, p] of Object.entries(self.presets)) {
 }
 ok('every variable used on a preset button is defined', bad.length === 0, bad.join(', '))
 
+// Button text needs REAL newlines. A literal backslash-n prints as "\n" on the key.
+const escaped = Object.entries(self.presets)
+	.filter(([, p]) => /\\n/.test(String(p.style?.text ?? '')) || /\\n/.test(String(p.feedbacks?.[0]?.style?.text ?? '')))
+	.map(([id]) => id)
+ok('preset button text uses real newlines, not a literal backslash-n', escaped.length === 0, escaped.join(', '))
+
+// Companion only accepts a fixed set of text sizes.
+const SIZES = new Set(['auto', '7', '14', '18', '24', '30', '44'])
+const badSize = Object.entries(self.presets)
+	.filter(([, p]) => !SIZES.has(String(p.style?.size)) && typeof p.style?.size !== 'number')
+	.map(([id, p]) => `${id}=${p?.style?.size}`)
+ok('every preset uses a text size Companion accepts', badSize.length === 0, badSize.join(', '))
+
+// Shapes Companion's own types require.
+const shapeBad = Object.entries(self.presets)
+	.filter(([, p]) => p.type !== 'button' || !p.category || !p.name || !Array.isArray(p.steps) || !Array.isArray(p.feedbacks))
+	.map(([id]) => id)
+ok('every preset matches the button preset shape', shapeBad.length === 0, shapeBad.join(', '))
+
+// Every action and feedback a preset points at must actually exist.
+const missing = []
+for (const [id, p] of Object.entries(self.presets)) {
+	for (const st of p.steps ?? []) for (const a of [...(st.down ?? []), ...(st.up ?? [])]) if (!self.actions[a.actionId]) missing.push(`${id} -> action ${a.actionId}`)
+	for (const f of p.feedbacks ?? []) if (!self.feedbacks[f.feedbackId]) missing.push(`${id} -> feedback ${f.feedbackId}`)
+}
+ok('every action/feedback referenced by a preset exists', missing.length === 0, missing.join(', '))
+
 self.api.close()
 console.log(`\n${fails === 0 ? 'ALL PASS' : fails + ' FAILED'}\n`)
 process.exit(fails === 0 ? 0 : 1)

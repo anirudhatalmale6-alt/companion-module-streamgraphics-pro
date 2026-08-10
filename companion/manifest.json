@@ -19,10 +19,19 @@
   "runtime": {
     "type": "node22",
     "api": "nodejs-ipc",
-    "apiVersion": "2.1.2",
+    "apiVersion": "1.14.1",
     "entrypoint": "../main.js"
   },
   "manufacturer": "Manhattan Beach Studios",
-  "products": ["StreamGraphics Pro"],
-  "keywords": ["Graphics", "Scoreboard", "Timer", "Lower third", "OBS", "vMix"]
+  "products": [
+    "StreamGraphics Pro"
+  ],
+  "keywords": [
+    "Graphics",
+    "Scoreboard",
+    "Timer",
+    "Lower third",
+    "OBS",
+    "vMix"
+  ]
 }

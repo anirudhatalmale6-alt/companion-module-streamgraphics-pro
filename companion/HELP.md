@@ -5,7 +5,8 @@ the presenter timer, and baseball/softball.
 
 ### Setting it up
 
-1. Start StreamGraphics Pro on the show computer.
+1. Start StreamGraphics Pro on the show computer. It needs to be running before
+   this connection can go green.
 2. Add this connection in Companion and fill in two fields:
 
    | Field | What to put |
