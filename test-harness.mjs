@@ -192,6 +192,44 @@ for (const [id, p] of Object.entries(self.presets)) {
 }
 ok('every action/feedback referenced by a preset exists', missing.length === 0, missing.join(', '))
 
+// --- bullet build round trip (needs a Library preset containing a bullets layer) ---------
+const bulPreset = (self.state.shows ?? []).find((s) => (s.reveals ?? []).length)
+if (!bulPreset) {
+	console.log('   SKIPPED bullets round trip — no preset in the Library has a bullets layer')
+} else {
+	const pk = bulPreset.name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')
+	ok('bullet transport actions exist', !!self.actions.bullets_next && !!self.actions.bullets_blank)
+	ok('bullet buttons were built for the graphic', !!self.presets[`bul_next_${pk}`])
+
+	await self.actions.bullets_blank.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+	ok('blank leaves nothing revealed', Number(self.vars[`preset_${pk}_bullet`]) === 0, String(self.vars[`preset_${pk}_bullet`]))
+
+	await self.actions.bullets_next.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+	ok('next reveals the first point', Number(self.vars[`preset_${pk}_bullet`]) === 1, String(self.vars[`preset_${pk}_bullet`]))
+
+	await self.actions.bullets_next.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+	ok('next again reveals the second', Number(self.vars[`preset_${pk}_bullet`]) === 2, String(self.vars[`preset_${pk}_bullet`]))
+
+	await self.actions.bullets_prev.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+	ok('prev takes the last point back', Number(self.vars[`preset_${pk}_bullet`]) === 1, String(self.vars[`preset_${pk}_bullet`]))
+
+	await self.actions.bullets_all.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+	const total = Number(self.vars[`preset_${pk}_bullets`])
+	ok('all reveals every point', Number(self.vars[`preset_${pk}_bullet`]) === total, `${self.vars[`preset_${pk}_bullet`]}/${total}`)
+
+	await self.actions.bullets_goto.callback({ options: { name: bulPreset.name, layer: '', n: '2' } })
+	await nextState()
+	ok('jump to a point lands on it', Number(self.vars[`preset_${pk}_bullet`]) === 2, String(self.vars[`preset_${pk}_bullet`]))
+
+	await self.actions.bullets_blank.callback({ options: { name: bulPreset.name, layer: '' } })
+	await nextState()
+}
+
 self.api.close()
 console.log(`\n${fails === 0 ? 'ALL PASS' : fails + ' FAILED'}\n`)
 process.exit(fails === 0 ? 0 : 1)

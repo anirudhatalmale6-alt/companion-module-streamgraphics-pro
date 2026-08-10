@@ -75,6 +75,12 @@ export function updateVariableDefinitions(self) {
 			{ variableId: `preset_${k}_rows`, name: `${s.name} — spreadsheet rows in total` },
 			{ variableId: `preset_${k}_label`, name: `${s.name} — label of the row showing` }
 		)
+		if ((s.reveals ?? []).length) {
+			defs.push(
+				{ variableId: `preset_${k}_bullet`, name: `${s.name} — bullet showing (0 = none yet)` },
+				{ variableId: `preset_${k}_bullets`, name: `${s.name} — bullets in total` }
+			)
+		}
 	}
 
 	self.setVariableDefinitions(defs)
@@ -117,6 +123,12 @@ export function updateVariableValues(self) {
 		v[`preset_${k}_row`] = total ? idx + 1 : 0
 		v[`preset_${k}_rows`] = total
 		v[`preset_${k}_label`] = s.rowLabels?.[idx] ?? ''
+		// First bullets/slides layer in the graphic — the one a plain Next button drives.
+		const rv = (s.reveals ?? [])[0]
+		if (rv) {
+			v[`preset_${k}_bullet`] = (rv.index ?? -1) + 1
+			v[`preset_${k}_bullets`] = rv.count ?? 0
+		}
 	}
 
 	self.setVariableValues(v)

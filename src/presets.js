@@ -71,6 +71,49 @@ export function updatePresets(self) {
 				feedbacks: [],
 			}
 		}
+
+		// A graphic that builds gets its own ready-made transport: the Next key carries the
+		// count so the operator can see where they are in the list without looking away.
+		if ((s.reveals ?? []).length) {
+			const cat = `Bullets — ${s.name}`
+			presets[`bul_next_${k}`] = {
+				type: 'button',
+				category: cat,
+				name: `${s.name} — next bullet`,
+				style: style(
+					`${s.name}\n▶ NEXT\n$(streamgraphics-pro:preset_${k}_bullet)/$(streamgraphics-pro:preset_${k}_bullets)`,
+					GREEN,
+					BLACK,
+					'7'
+				),
+				steps: [{ down: [{ actionId: 'bullets_next', options: { name: s.name, layer: '' } }], up: [] }],
+				feedbacks: [],
+			}
+			presets[`bul_prev_${k}`] = {
+				type: 'button',
+				category: cat,
+				name: `${s.name} — take the last bullet back`,
+				style: style(`${s.name}\n◀ BACK`, DARK, WHITE, '7'),
+				steps: [{ down: [{ actionId: 'bullets_prev', options: { name: s.name, layer: '' } }], up: [] }],
+				feedbacks: [],
+			}
+			presets[`bul_all_${k}`] = {
+				type: 'button',
+				category: cat,
+				name: `${s.name} — reveal every bullet`,
+				style: style(`${s.name}\nALL`, BLUE, WHITE, '7'),
+				steps: [{ down: [{ actionId: 'bullets_all', options: { name: s.name, layer: '' } }], up: [] }],
+				feedbacks: [],
+			}
+			presets[`bul_blank_${k}`] = {
+				type: 'button',
+				category: cat,
+				name: `${s.name} — back to nothing revealed`,
+				style: style(`${s.name}\nBLANK`, DARK, AMBER, '7'),
+				steps: [{ down: [{ actionId: 'bullets_blank', options: { name: s.name, layer: '' } }], up: [] }],
+				feedbacks: [],
+			}
+		}
 	}
 
 	presets['preset_alloff'] = {

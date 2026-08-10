@@ -42,8 +42,19 @@ export function updateActions(self) {
 		],
 	}
 
+	const layerField = {
+		type: 'textinput',
+		label: 'Bullets layer (optional)',
+		id: 'layer',
+		default: '',
+		useVariables: true,
+		tooltip: 'Only needed when one graphic holds more than one bullet list — type the layer name. Blank = the first one.',
+	}
+
 	// Resolve a dropdown that may hold a variable expression.
 	const name = async (opt) => (await self.parseVariablesInString(String(opt ?? ''))).trim()
+	const revealUrl = (cmd, preset, layer) =>
+		`/api/bullets/${cmd}?preset=${q(preset)}` + (layer ? `&layer=${q(layer)}` : '')
 
 	self.setActionDefinitions({
 		// ---- Show Library ----
@@ -86,6 +97,49 @@ export function updateActions(self) {
 			callback: async (a) => {
 				const n = parseInt(await self.parseVariablesInString(String(a.options.n ?? '1')), 10) || 1
 				return self.command(`/api/preset/row?name=${q(await name(a.options.name))}&n=${n}`)
+			},
+		},
+
+		// ---- Bullet builds / slide decks inside a preset ----
+		// The layer box is optional: leave it blank and the first bullets (or slides) layer in
+		// the graphic is the one that steps, which is what a one-list graphic always wants.
+		bullets_next: {
+			name: 'Bullets: reveal the next point',
+			options: [presetField, layerField],
+			callback: async (a) => self.command(revealUrl('next', await name(a.options.name), await name(a.options.layer))),
+		},
+		bullets_prev: {
+			name: 'Bullets: take the last point back',
+			options: [presetField, layerField],
+			callback: async (a) => self.command(revealUrl('prev', await name(a.options.name), await name(a.options.layer))),
+		},
+		bullets_first: {
+			name: 'Bullets: back to the first point',
+			options: [presetField, layerField],
+			callback: async (a) => self.command(revealUrl('first', await name(a.options.name), await name(a.options.layer))),
+		},
+		bullets_all: {
+			name: 'Bullets: reveal every point',
+			options: [presetField, layerField],
+			callback: async (a) => self.command(revealUrl('all', await name(a.options.name), await name(a.options.layer))),
+		},
+		bullets_blank: {
+			name: 'Bullets: back to nothing revealed',
+			options: [presetField, layerField],
+			callback: async (a) => self.command(revealUrl('blank', await name(a.options.name), await name(a.options.layer))),
+		},
+		bullets_goto: {
+			name: 'Bullets: jump to a point',
+			options: [
+				presetField,
+				layerField,
+				{ type: 'textinput', label: 'Point number (1 = first, 0 = blank)', id: 'n', default: '1', useVariables: true },
+			],
+			callback: async (a) => {
+				const n = parseInt(await self.parseVariablesInString(String(a.options.n ?? '1')), 10)
+				return self.command(
+					revealUrl('goto', await name(a.options.name), await name(a.options.layer)) + `&n=${isNaN(n) ? 1 : n}`
+				)
 			},
 		},
 
