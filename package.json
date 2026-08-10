@@ -5,7 +5,8 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "check": "node --check main.js && node --check src/api.js && node --check src/actions.js && node --check src/feedbacks.js && node --check src/variables.js && node --check src/presets.js"
+    "check": "node --check main.js && node --check src/api.js && node --check src/actions.js && node --check src/feedbacks.js && node --check src/variables.js && node --check src/presets.js && npm run check:manifest",
+    "check:manifest": "node -e \"const v=require('./node_modules/@companion-module/base/generated/validate_manifest.js'),f=typeof v==='function'?v:(v.default||Object.values(v)[0]),j=require('./companion/manifest.json');if(!f(j)){console.error(JSON.stringify(f.errors,null,1));process.exit(1)}console.log('manifest ok')\""
   },
   "license": "MIT",
   "repository": {

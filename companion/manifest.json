@@ -1,4 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/bitfocus/companion-module-base/main/assets/manifest.schema.json",
+  "type": "connection",
   "id": "streamgraphics-pro",
   "name": "streamgraphics-pro",
   "shortname": "StreamGraphics Pro",
@@ -13,6 +15,7 @@
       "email": "mark@streamgraphicspro.com"
     }
   ],
+  "legacyIds": [],
   "runtime": {
     "type": "node22",
     "api": "nodejs-ipc",
