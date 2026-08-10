@@ -1,0 +1,25 @@
+{
+  "id": "streamgraphics-pro",
+  "name": "streamgraphics-pro",
+  "shortname": "StreamGraphics Pro",
+  "description": "Live broadcast graphics — lower thirds, scoreboards, timers and slides. Runs on the show computer; drive it from Companion.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "https://github.com/anirudhatalmale6-alt/companion-module-streamgraphics-pro",
+  "bugs": "https://github.com/anirudhatalmale6-alt/companion-module-streamgraphics-pro/issues",
+  "maintainers": [
+    {
+      "name": "Manhattan Beach Studios LLC",
+      "email": "mark@streamgraphicspro.com"
+    }
+  ],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "2.1.2",
+    "entrypoint": "../main.js"
+  },
+  "manufacturer": "Manhattan Beach Studios",
+  "products": ["StreamGraphics Pro"],
+  "keywords": ["Graphics", "Scoreboard", "Timer", "Lower third", "OBS", "vMix"]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "companion-module-streamgraphics-pro",
+  "version": "1.0.0",
+  "description": "Bitfocus Companion module for StreamGraphics Pro — lower thirds, scoreboards, timers and slides for OBS, vMix and any browser source.",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "check": "node --check main.js && node --check src/api.js && node --check src/actions.js && node --check src/feedbacks.js && node --check src/variables.js && node --check src/presets.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anirudhatalmale6-alt/companion-module-streamgraphics-pro.git"
+  },
+  "dependencies": {
+    "@companion-module/base": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
