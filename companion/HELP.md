@@ -11,7 +11,7 @@ the presenter timer, and baseball/softball.
 
    | Field | What to put |
    |---|---|
-   | Address of the show computer | `127.0.0.1` if Companion is on that same computer. Otherwise the show computer's network address — the app prints it on its home page, e.g. `192.168.1.50` |
+   | Address of the show computer | `127.0.0.1` if Companion is on that same computer. Otherwise the show computer's own network address, which the app prints on its home page under "Use on another device" — read it from there rather than guessing |
    | Port | `4000` unless you changed it |
 
 3. The connection turns green when it's talking to the app. If it doesn't, check
